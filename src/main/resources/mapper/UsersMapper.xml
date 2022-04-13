@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.lifaapi.mapper.UsersMapper">
+  <insert id="logUp">
+    INSERT INTO users(userId,userName,password)
+    VALUES (#{param1},#{param2},#{param3})
+  </insert>
+
+  <select id="findByUsername" resultType="com.chen.lifaapi.entity.Users">
+    SELECT userid,username,password
+    FROM users
+    WHERE username=#{username}
+  </select>
+    <select id="login" resultType="com.chen.lifaapi.entity.Users" parameterType="string">
+      SELECT *
+      FROM users
+      WHERE userId=#{param1} AND password=#{param2}
+    </select>
+  <select id="getNum" resultType="java.lang.Integer">
+    SELECT COUNT(*)
+    FROM users
+  </select>
+
+</mapper>

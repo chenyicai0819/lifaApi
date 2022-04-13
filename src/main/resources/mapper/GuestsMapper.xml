@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.lifaapi.mapper.GuestsMapper">
+  <resultMap id="BaseResultMap" type="com.chen.lifaapi.entity.Guests">
+    <id column="guestId" jdbcType="VARCHAR" property="guestid" />
+    <result column="guestName" jdbcType="VARCHAR" property="guestname" />
+    <result column="guestPhone" jdbcType="VARCHAR" property="guestphone" />
+    <result column="gusetSex" jdbcType="INTEGER" property="gusetsex" />
+    <result column="guestText" jdbcType="VARCHAR" property="guesttext" />
+    <result column="guestMoney" jdbcType="DECIMAL" property="guestmoney" />
+    <result column="guestTime" jdbcType="TIMESTAMP" property="guesttime" />
+    <result column="guestCome" jdbcType="VARCHAR" property="guestcome" />
+    <result column="guestWorker" jdbcType="VARCHAR" property="guestworker" />
+    <result column="guestRemark" jdbcType="VARCHAR" property="guestremark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    guestId, guestName, guestPhone, gusetSex, guestText, guestMoney, guestTime, guestCome, 
+    guestWorker, guestRemark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from guests
+    where guestId = #{guestid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from guests
+    where guestId = #{guestid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="guestId" keyProperty="guestid" parameterType="com.chen.lifaapi.entity.Guests" useGeneratedKeys="true">
+    insert into guests (guestName, guestPhone, gusetSex, 
+      guestText, guestMoney, guestTime, 
+      guestCome, guestWorker, guestRemark
+      )
+    values (#{guestname,jdbcType=VARCHAR}, #{guestphone,jdbcType=VARCHAR}, #{gusetsex,jdbcType=INTEGER}, 
+      #{guesttext,jdbcType=VARCHAR}, #{guestmoney,jdbcType=DECIMAL}, #{guesttime,jdbcType=TIMESTAMP}, 
+      #{guestcome,jdbcType=VARCHAR}, #{guestworker,jdbcType=VARCHAR}, #{guestremark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="guestId" keyProperty="guestid" parameterType="com.chen.lifaapi.entity.Guests" useGeneratedKeys="true">
+    insert into guests
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="guestname != null">
+        guestName,
+      </if>
+      <if test="guestphone != null">
+        guestPhone,
+      </if>
+      <if test="gusetsex != null">
+        gusetSex,
+      </if>
+      <if test="guesttext != null">
+        guestText,
+      </if>
+      <if test="guestmoney != null">
+        guestMoney,
+      </if>
+      <if test="guesttime != null">
+        guestTime,
+      </if>
+      <if test="guestcome != null">
+        guestCome,
+      </if>
+      <if test="guestworker != null">
+        guestWorker,
+      </if>
+      <if test="guestremark != null">
+        guestRemark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="guestname != null">
+        #{guestname,jdbcType=VARCHAR},
+      </if>
+      <if test="guestphone != null">
+        #{guestphone,jdbcType=VARCHAR},
+      </if>
+      <if test="gusetsex != null">
+        #{gusetsex,jdbcType=INTEGER},
+      </if>
+      <if test="guesttext != null">
+        #{guesttext,jdbcType=VARCHAR},
+      </if>
+      <if test="guestmoney != null">
+        #{guestmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="guesttime != null">
+        #{guesttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="guestcome != null">
+        #{guestcome,jdbcType=VARCHAR},
+      </if>
+      <if test="guestworker != null">
+        #{guestworker,jdbcType=VARCHAR},
+      </if>
+      <if test="guestremark != null">
+        #{guestremark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chen.lifaapi.entity.Guests">
+    update guests
+    <set>
+      <if test="guestname != null">
+        guestName = #{guestname,jdbcType=VARCHAR},
+      </if>
+      <if test="guestphone != null">
+        guestPhone = #{guestphone,jdbcType=VARCHAR},
+      </if>
+      <if test="gusetsex != null">
+        gusetSex = #{gusetsex,jdbcType=INTEGER},
+      </if>
+      <if test="guesttext != null">
+        guestText = #{guesttext,jdbcType=VARCHAR},
+      </if>
+      <if test="guestmoney != null">
+        guestMoney = #{guestmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="guesttime != null">
+        guestTime = #{guesttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="guestcome != null">
+        guestCome = #{guestcome,jdbcType=VARCHAR},
+      </if>
+      <if test="guestworker != null">
+        guestWorker = #{guestworker,jdbcType=VARCHAR},
+      </if>
+      <if test="guestremark != null">
+        guestRemark = #{guestremark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where guestId = #{guestid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chen.lifaapi.entity.Guests">
+    update guests
+    set guestName = #{guestname,jdbcType=VARCHAR},
+      guestPhone = #{guestphone,jdbcType=VARCHAR},
+      gusetSex = #{gusetsex,jdbcType=INTEGER},
+      guestText = #{guesttext,jdbcType=VARCHAR},
+      guestMoney = #{guestmoney,jdbcType=DECIMAL},
+      guestTime = #{guesttime,jdbcType=TIMESTAMP},
+      guestCome = #{guestcome,jdbcType=VARCHAR},
+      guestWorker = #{guestworker,jdbcType=VARCHAR},
+      guestRemark = #{guestremark,jdbcType=VARCHAR}
+    where guestId = #{guestid,jdbcType=VARCHAR}
+  </update>
+</mapper>

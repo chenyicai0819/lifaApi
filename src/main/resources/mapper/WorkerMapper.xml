@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.lifaapi.mapper.WorkerMapper">
+    <insert id="addWorker">
+        INSERT INTO worker(workId,levelId,workName,workSex,workPhone,workState,
+        workDate,workBirthday,workIDcard,workBank,baseSalary,bonus)
+        VALUES (#{workId,jdbcType=VARCHAR},#{levelId,jdbcType=VARCHAR},#{workName,jdbcType=VARCHAR},
+                #{workSex,jdbcType=VARCHAR},#{workPhone,jdbcType=VARCHAR},#{workState,jdbcType=INTEGER},
+                #{workDate,jdbcType=TIMESTAMP},#{workBirthday,jdbcType=TIMESTAMP},
+                #{workIDcard,jdbcType=VARCHAR},#{workBank,jdbcType=VARCHAR},#{baseSalary,jdbcType=DECIMAL}
+                   ,#{bonus,jdbcType=DECIMAL})
+    </insert>
+    <update id="addBonus" parameterType="map">
+        UPDATE worker
+        SET bonus=#{bonus}
+        WHERE workId=#{id}
+    </update>
+    <update id="updateWorker">
+        update worker
+        <set>
+            <if test="levelId != null">
+                levelId = #{levelId,jdbcType=VARCHAR},
+            </if>
+            <if test="workName != null">
+                workName = #{workName,jdbcType=VARCHAR},
+            </if>
+            <if test="workSex != null">
+                workSex = #{workSex,jdbcType=VARCHAR},
+            </if>
+            <if test="workPhone != null">
+                workPhone = #{workPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="workState != null">
+                workState = #{workState,jdbcType=INTEGER},
+            </if>
+            <if test="workDate != null">
+                workDate = #{workDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="workBirthday != null">
+                workBirthday = #{workBirthday,jdbcType=TIMESTAMP},
+            </if>
+            <if test="workIDcard != null">
+                workIDcard = #{workIDcard,jdbcType=VARCHAR},
+            </if>
+            <if test="workBank != null">
+                workBank = #{workBank,jdbcType=VARCHAR},
+            </if>
+            <if test="baseSalary != null">
+                baseSalary = #{baseSalary,jdbcType=DECIMAL},
+            </if>
+            <if test="bonus != null">
+                bonus = #{bonus,jdbcType=DECIMAL},
+            </if>
+        </set>
+        where workId = #{workId,jdbcType=VARCHAR}
+    </update>
+
+    <select id="getAllWorker" resultType="com.chen.lifaapi.entity.Worker">
+    SELECT *
+        FROM worker
+    </select>
+    <select id="getBonus" resultType="java.lang.Long">
+        SELECT bonus
+        FROM worker
+        WHERE workId=#{id}
+    </select>
+    <select id="getIdForName" resultType="java.lang.String">
+        SELECT workId
+        FROM worker
+        WHERE workName=#{name}
+    </select>
+    <select id="getWorker" resultType="com.chen.lifaapi.entity.Worker">
+        SELECT *
+        FROM worker
+        WHERE 1=1
+        <if test="state!=0" >
+           AND workState=#{state}
+        </if>
+        <if test="level!=''" >
+           AND levelId=#{level}
+        </if>
+    </select>
+    <select id="getOneForId" resultType="com.chen.lifaapi.entity.Worker">
+        SELECT *
+        FROM worker
+        WHERE workId=#{id}
+    </select>
+
+</mapper>

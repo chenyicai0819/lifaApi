@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.lifaapi.mapper.ServiceMapper">
+    <insert id="addService">
+        INSERT INTO service(serTyId,serName,serPrice,serState)
+        VALUES (1,#{param1},#{param2},'1')
+    </insert>
+    <delete id="delService">
+        DELETE FROM service
+        WHERE serId=#{id}
+    </delete>
+    <select id="getAllService" resultType="com.chen.lifaapi.entity.Service">
+    SELECT *
+    FROM service
+  </select>
+  <select id="pageGetService" resultType="com.chen.lifaapi.entity.Service">
+    SELECT *
+    FROM service
+    LIMIT #{num},#{pagesize}
+  </select>
+</mapper>

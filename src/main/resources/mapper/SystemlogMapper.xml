@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.lifaapi.mapper.SystemlogMapper">
+  <resultMap id="BaseResultMap" type="com.chen.lifaapi.entity.Systemlog">
+    <id column="systemId" jdbcType="INTEGER" property="systemid" />
+    <result column="systemText" jdbcType="VARCHAR" property="systemtext" />
+    <result column="systemTime" jdbcType="TIMESTAMP" property="systemtime" />
+    <result column="systemIp" jdbcType="VARCHAR" property="systemip" />
+    <result column="systemUser" jdbcType="VARCHAR" property="systemuser" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    systemId, systemText, systemTime, systemIp, systemUser
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from systemlog
+    where systemId = #{systemid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from systemlog
+    where systemId = #{systemid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="systemId" keyProperty="systemid" parameterType="com.chen.lifaapi.entity.Systemlog" useGeneratedKeys="true">
+    insert into systemlog (systemText, systemTime, systemIp, 
+      systemUser)
+    values (#{systemtext,jdbcType=VARCHAR}, #{systemtime,jdbcType=TIMESTAMP}, #{systemip,jdbcType=VARCHAR}, 
+      #{systemuser,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="systemId" keyProperty="systemid" parameterType="com.chen.lifaapi.entity.Systemlog" useGeneratedKeys="true">
+    insert into systemlog
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="systemtext != null">
+        systemText,
+      </if>
+      <if test="systemtime != null">
+        systemTime,
+      </if>
+      <if test="systemip != null">
+        systemIp,
+      </if>
+      <if test="systemuser != null">
+        systemUser,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="systemtext != null">
+        #{systemtext,jdbcType=VARCHAR},
+      </if>
+      <if test="systemtime != null">
+        #{systemtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="systemip != null">
+        #{systemip,jdbcType=VARCHAR},
+      </if>
+      <if test="systemuser != null">
+        #{systemuser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chen.lifaapi.entity.Systemlog">
+    update systemlog
+    <set>
+      <if test="systemtext != null">
+        systemText = #{systemtext,jdbcType=VARCHAR},
+      </if>
+      <if test="systemtime != null">
+        systemTime = #{systemtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="systemip != null">
+        systemIp = #{systemip,jdbcType=VARCHAR},
+      </if>
+      <if test="systemuser != null">
+        systemUser = #{systemuser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where systemId = #{systemid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chen.lifaapi.entity.Systemlog">
+    update systemlog
+    set systemText = #{systemtext,jdbcType=VARCHAR},
+      systemTime = #{systemtime,jdbcType=TIMESTAMP},
+      systemIp = #{systemip,jdbcType=VARCHAR},
+      systemUser = #{systemuser,jdbcType=VARCHAR}
+    where systemId = #{systemid,jdbcType=INTEGER}
+  </update>
+</mapper>

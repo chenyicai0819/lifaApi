@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.lifaapi.mapper.UserroleMapper">
+  <resultMap id="BaseResultMap" type="com.chen.lifaapi.entity.UserroleKey">
+    <id column="userId" jdbcType="VARCHAR" property="userid" />
+    <id column="rolesId" jdbcType="VARCHAR" property="rolesid" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="com.chen.lifaapi.entity.UserroleKey">
+    delete from userrole
+    where userId = #{userid,jdbcType=VARCHAR}
+      and rolesId = #{rolesid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="userId" keyProperty="userid" parameterType="com.chen.lifaapi.entity.UserroleKey" useGeneratedKeys="true">
+    insert into userrole (rolesId)
+    values (#{rolesid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="userId" keyProperty="userid" parameterType="com.chen.lifaapi.entity.UserroleKey" useGeneratedKeys="true">
+    insert into userrole
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rolesid != null">
+        rolesId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rolesid != null">
+        #{rolesid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

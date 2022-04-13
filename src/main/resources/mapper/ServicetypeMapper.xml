@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.lifaapi.mapper.ServicetypeMapper">
+  <resultMap id="BaseResultMap" type="com.chen.lifaapi.entity.Servicetype">
+    <id column="serTyId" jdbcType="VARCHAR" property="sertyid" />
+    <result column="serTyName" jdbcType="VARCHAR" property="sertyname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    serTyId, serTyName
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from servicetype
+    where serTyId = #{sertyid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from servicetype
+    where serTyId = #{sertyid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="serTyId" keyProperty="sertyid" parameterType="com.chen.lifaapi.entity.Servicetype" useGeneratedKeys="true">
+    insert into servicetype (serTyName)
+    values (#{sertyname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="serTyId" keyProperty="sertyid" parameterType="com.chen.lifaapi.entity.Servicetype" useGeneratedKeys="true">
+    insert into servicetype
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sertyname != null">
+        serTyName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sertyname != null">
+        #{sertyname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chen.lifaapi.entity.Servicetype">
+    update servicetype
+    <set>
+      <if test="sertyname != null">
+        serTyName = #{sertyname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where serTyId = #{sertyid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chen.lifaapi.entity.Servicetype">
+    update servicetype
+    set serTyName = #{sertyname,jdbcType=VARCHAR}
+    where serTyId = #{sertyid,jdbcType=VARCHAR}
+  </update>
+</mapper>

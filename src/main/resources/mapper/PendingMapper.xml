@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.lifaapi.mapper.PendingMapper">
+  <resultMap id="BaseResultMap" type="com.chen.lifaapi.entity.Pending">
+    <id column="penId" jdbcType="VARCHAR" property="penid" />
+    <result column="penName" jdbcType="VARCHAR" property="penname" />
+    <result column="penPrice" jdbcType="DECIMAL" property="penprice" />
+    <result column="penText" jdbcType="VARCHAR" property="pentext" />
+    <result column="penMoney" jdbcType="DECIMAL" property="penmoney" />
+    <result column="penWorker" jdbcType="VARCHAR" property="penworker" />
+    <result column="penRemark" jdbcType="VARCHAR" property="penremark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    penId, penName, penPrice, penText, penMoney, penWorker, penRemark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from pending
+    where penId = #{penid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from pending
+    where penId = #{penid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="penId" keyProperty="penid" parameterType="com.chen.lifaapi.entity.Pending" useGeneratedKeys="true">
+    insert into pending (penName, penPrice, penText, 
+      penMoney, penWorker, penRemark
+      )
+    values (#{penname,jdbcType=VARCHAR}, #{penprice,jdbcType=DECIMAL}, #{pentext,jdbcType=VARCHAR}, 
+      #{penmoney,jdbcType=DECIMAL}, #{penworker,jdbcType=VARCHAR}, #{penremark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="penId" keyProperty="penid" parameterType="com.chen.lifaapi.entity.Pending" useGeneratedKeys="true">
+    insert into pending
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="penname != null">
+        penName,
+      </if>
+      <if test="penprice != null">
+        penPrice,
+      </if>
+      <if test="pentext != null">
+        penText,
+      </if>
+      <if test="penmoney != null">
+        penMoney,
+      </if>
+      <if test="penworker != null">
+        penWorker,
+      </if>
+      <if test="penremark != null">
+        penRemark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="penname != null">
+        #{penname,jdbcType=VARCHAR},
+      </if>
+      <if test="penprice != null">
+        #{penprice,jdbcType=DECIMAL},
+      </if>
+      <if test="pentext != null">
+        #{pentext,jdbcType=VARCHAR},
+      </if>
+      <if test="penmoney != null">
+        #{penmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="penworker != null">
+        #{penworker,jdbcType=VARCHAR},
+      </if>
+      <if test="penremark != null">
+        #{penremark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chen.lifaapi.entity.Pending">
+    update pending
+    <set>
+      <if test="penname != null">
+        penName = #{penname,jdbcType=VARCHAR},
+      </if>
+      <if test="penprice != null">
+        penPrice = #{penprice,jdbcType=DECIMAL},
+      </if>
+      <if test="pentext != null">
+        penText = #{pentext,jdbcType=VARCHAR},
+      </if>
+      <if test="penmoney != null">
+        penMoney = #{penmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="penworker != null">
+        penWorker = #{penworker,jdbcType=VARCHAR},
+      </if>
+      <if test="penremark != null">
+        penRemark = #{penremark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where penId = #{penid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chen.lifaapi.entity.Pending">
+    update pending
+    set penName = #{penname,jdbcType=VARCHAR},
+      penPrice = #{penprice,jdbcType=DECIMAL},
+      penText = #{pentext,jdbcType=VARCHAR},
+      penMoney = #{penmoney,jdbcType=DECIMAL},
+      penWorker = #{penworker,jdbcType=VARCHAR},
+      penRemark = #{penremark,jdbcType=VARCHAR}
+    where penId = #{penid,jdbcType=VARCHAR}
+  </update>
+</mapper>

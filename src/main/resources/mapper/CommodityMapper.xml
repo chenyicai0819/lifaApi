@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.lifaapi.mapper.CommodityMapper">
+  <resultMap id="BaseResultMap" type="com.chen.lifaapi.entity.Commodity">
+    <id column="commId" jdbcType="VARCHAR" property="commId" />
+    <result column="commTyId" jdbcType="VARCHAR" property="commtyId" />
+    <result column="commName" jdbcType="VARCHAR" property="commName" />
+    <result column="commPrice" jdbcType="DECIMAL" property="commPrice" />
+    <result column="commNum" jdbcType="INTEGER" property="commNum" />
+    <result column="commState" jdbcType="INTEGER" property="commState" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    commId, commTyId, commName, commPrice, commNum, commState
+  </sql>
+  <insert id="insert" parameterType="com.chen.lifaapi.entity.Commodity">
+    insert into commodity (commtyId, commName, commPrice,
+      commNum, commState)
+    values (#{commtyId,jdbcType=VARCHAR}, #{commName,jdbcType=VARCHAR}, #{commPrice,jdbcType=DECIMAL},
+      #{commNum,jdbcType=INTEGER}, #{commState,jdbcType=INTEGER})
+  </insert>
+  <update id="upComm">
+    UPDATE commodity
+    <set>
+      <if test="commtyId != null">
+        commtyId = #{commtyId,jdbcType=VARCHAR},
+      </if>
+      <if test="commName != null">
+        commName = #{commName,jdbcType=VARCHAR},
+      </if>
+      <if test="commPrice != null">
+        commPrice = #{commPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="commNum != null">
+        commNum = #{commNum,jdbcType=INTEGER},
+      </if>
+      <if test="commState != null">
+        commState = #{commState,jdbcType=INTEGER},
+      </if>
+    </set>
+    where commId = #{commId,jdbcType=INTEGER}
+  </update>
+  <delete id="delComm">
+    DELETE FROM commodity
+    WHERE commId=#{id}
+  </delete>
+  <select id="getAllComm" resultType="com.chen.lifaapi.entity.Commodity">
+    SELECT *
+    FROM commodity
+  </select>
+  <select id="pageVipList" resultType="com.chen.lifaapi.entity.Commodity">
+    SELECT *
+    FROM commodity
+    LIMIT #{num},#{pagesize}
+  </select>
+  <select id="priceComm" resultType="java.lang.Integer">
+    SELECT SUM(commPrice*commNum) allPrice
+      FROM commodity
+  </select>
+</mapper>

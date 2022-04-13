@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.lifaapi.mapper.VipsMapper">
+  <resultMap id="BaseResultMap" type="com.chen.lifaapi.entity.Vips">
+    <id column="vipId" jdbcType="VARCHAR" property="vipId" />
+    <result column="typeId" jdbcType="INTEGER" property="typeId" />
+    <result column="vipName" jdbcType="VARCHAR" property="vipName" />
+    <result column="vipPassWord" jdbcType="VARCHAR" property="vipPassword" />
+    <result column="vipPhone" jdbcType="VARCHAR" property="vipPhone" />
+    <result column="vipSex" jdbcType="VARCHAR" property="vipSex" />
+    <result column="vipBirthday" jdbcType="TIMESTAMP" property="vipBirthday" />
+    <result column="vipOpenCard" jdbcType="TIMESTAMP" property="vipOpencard" />
+    <result column="vipsMoney" jdbcType="DECIMAL" property="vipsMoney" />
+    <result column="vipsConsume" jdbcType="DECIMAL" property="vipsConsume" />
+    <result column="vipsBonus" jdbcType="DECIMAL" property="vipsBonus" />
+    <result column="vipsLast" jdbcType="TIMESTAMP" property="vipsLast" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    vipId, typeId, vipName, vipPassWord, vipPhone, vipSex, vipBirthday, vipOpenCard, 
+    vipsMoney, vipsConsume, vipsBonus, vipsLast
+  </sql>
+    <select id="getVipList" resultType="com.chen.lifaapi.entity.Vips">
+      select
+      <include refid="Base_Column_List" />
+      from vips
+    </select>
+  <select id="indexVips" resultType="java.lang.Integer">
+    SELECT COUNT(*)
+    FROM vips
+  </select>
+   <insert id="insert" keyColumn="vipId" keyProperty="vipid" parameterType="com.chen.lifaapi.entity.Vips" useGeneratedKeys="true">
+    insert into vips (vipId,typeId, vipName, vipPassWord,
+      vipPhone, vipSex, vipBirthday, 
+      vipOpenCard, vipsMoney, vipsConsume, 
+      vipsBonus, vipsLast)
+    values (#{vipId,jdbcType=VARCHAR},#{typeId,jdbcType=INTEGER}, #{vipName,jdbcType=VARCHAR}, #{vipPassword,jdbcType=VARCHAR},
+      #{vipPhone,jdbcType=VARCHAR}, #{vipSex,jdbcType=VARCHAR}, #{vipBirthday,jdbcType=TIMESTAMP},
+      #{vipOpencard,jdbcType=TIMESTAMP}, #{vipsMoney,jdbcType=DECIMAL}, #{vipsConsume,jdbcType=DECIMAL},
+      #{vipsBonus,jdbcType=DECIMAL}, #{vipsLast,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chen.lifaapi.entity.Vips">
+    update vips
+    <set>
+      <if test="typeId != null">
+        typeId = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="vipName != null">
+        vipName = #{vipName,jdbcType=VARCHAR},
+      </if>
+      <if test="vipPassword != null">
+        vipPassWord = #{vipPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="vipPhone != null">
+        vipPhone = #{vipPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="vipSex != null">
+        vipSex = #{vipSex,jdbcType=VARCHAR},
+      </if>
+      <if test="vipBirthday != null">
+        vipBirthday = #{vipBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vipOpencard != null">
+        vipOpenCard = #{vipOpencard,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vipsMoney != null">
+        vipsMoney = #{vipsMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="vipsConsume != null">
+        vipsConsume = #{vipsConsume,jdbcType=DECIMAL},
+      </if>
+      <if test="vipsBonus != null">
+        vipsBonus = #{vipsBonus,jdbcType=DECIMAL},
+      </if>
+      <if test="vipsLast != null">
+        vipsLast = #{vipsLast,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where vipId = #{vipId,jdbcType=VARCHAR}
+  </update>
+  <select id="getVipForPhone" resultType="com.chen.lifaapi.entity.Vips">
+    SELECT *
+    FROM vips
+    WHERE vipPhone=#{phone}
+  </select>
+  <select id="getVipNumForPhone" resultType="java.lang.Integer">
+    SELECT COUNT(*)
+    FROM vips
+    WHERE vipPhone=#{phone}
+  </select>
+    <select id="pageVipList" resultType="com.chen.lifaapi.entity.Vips">
+      SELECT *
+      FROM vips
+      LIMIT #{num},#{pagesize}
+    </select>
+  <select id="getNowMoney" resultType="java.lang.Integer">
+    SELECT vipsMoney
+    FROM vips
+    WHERE vipId=#{id}
+  </select>
+    <select id="getVipsByEvery" resultType="com.chen.lifaapi.entity.Vips">
+      SELECT *
+      FROM vips
+      <where>
+        <if test="typeId != null">
+          AND typeId = #{typeId,jdbcType=INTEGER}
+        </if>
+        <if test="vipName != null">
+          AND vipName = #{vipName,jdbcType=VARCHAR}
+        </if>
+        <if test="vipPassword != null">
+          AND vipPassWord = #{vipPassword,jdbcType=VARCHAR}
+        </if>
+        <if test="vipPhone != null">
+          AND vipPhone = #{vipPhone,jdbcType=VARCHAR}
+        </if>
+        <if test="vipSex != null">
+          AND vipSex = #{vipSex,jdbcType=VARCHAR}
+        </if>
+        <if test="vipBirthday != null">
+          AND vipBirthday = #{vipBirthday,jdbcType=TIMESTAMP}
+        </if>
+        <if test="vipOpencard != null">
+          AND vipOpenCard = #{vipOpencard,jdbcType=TIMESTAMP}
+        </if>
+        <if test="vipsMoney != null">
+          AND vipsMoney = #{vipsMoney,jdbcType=DECIMAL}
+        </if>
+        <if test="vipsConsume != null">
+          AND vipsConsume = #{vipsConsume,jdbcType=DECIMAL}
+        </if>
+        <if test="vipsBonus != null">
+          AND vipsBonus = #{vipsBonus,jdbcType=DECIMAL}
+        </if>
+        <if test="vipsLast != null">
+          AND vipsLast = #{vipsLast,jdbcType=TIMESTAMP}
+        </if>
+      </where>
+    </select>
+    <select id="getOneVipForId" resultType="com.chen.lifaapi.entity.Vips">
+      SELECT *
+      FROM vips
+      WHERE vipId=#{id}
+    </select>
+</mapper>

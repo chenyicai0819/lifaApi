@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.lifaapi.mapper.OrdersMapper">
+  <resultMap id="BaseResultMap" type="com.chen.lifaapi.entity.Orders">
+    <id column="orderId" jdbcType="VARCHAR" property="orderId" />
+    <result column="orderPrice" jdbcType="DECIMAL" property="orderPrice" />
+    <result column="orderDate" jdbcType="DATE" property="orderDate" />
+    <result column="orderText" jdbcType="VARCHAR" property="orderText" />
+    <result column="orderMan" jdbcType="VARCHAR" property="orderMan" />
+    <result column="orderPhone" jdbcType="VARCHAR" property="orderPhone" />
+    <result column="orderSex" jdbcType="VARCHAR" property="orderSex" />
+    <result column="payType" jdbcType="VARCHAR" property="payType" />
+    <result column="orderMoney" jdbcType="DECIMAL" property="orderMoney" />
+    <result column="orderWorker" jdbcType="VARCHAR" property="orderWorker" />
+    <result column="orderOrderWorker" jdbcType="VARCHAR" property="orderOrderWorker" />
+    <result column="orderCome" jdbcType="VARCHAR" property="orderCome" />
+    <result column="orderRemake" jdbcType="VARCHAR" property="orderRemake" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    orderId, orderPrice, orderDate, orderText, orderMan, orderPhone, orderSex, payType,
+    orderMoney, orderWorker, orderOrderWorker, orderCome, orderRemake
+  </sql>
+  <insert id="insert" keyColumn="orderId" keyProperty="orderid" parameterType="com.chen.lifaapi.entity.Orders" useGeneratedKeys="true">
+    insert into orders (orderId,orderPrice, orderDate, orderText,
+      orderMan, orderPhone, orderSex,
+      payType, orderMoney, orderWorker, 
+      orderOrderWorker, orderCome, orderRemake
+      )
+    values (#{orderId,jdbcType=VARCHAR},#{orderPrice,jdbcType=DECIMAL}, #{orderDate,jdbcType=DATE}, #{orderText,jdbcType=VARCHAR},
+      #{orderMan,jdbcType=VARCHAR}, #{orderPhone,jdbcType=VARCHAR}, #{orderSex,jdbcType=VARCHAR},
+      #{payType,jdbcType=VARCHAR}, #{orderMoney,jdbcType=DECIMAL}, #{orderWorker,jdbcType=VARCHAR},
+      #{orderOrderWorker,jdbcType=VARCHAR}, #{orderCome,jdbcType=VARCHAR}, #{orderRemake,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="upOrder">
+    UPDATE orders
+    <set>
+      <if test="orderPrice != null">
+        orderPrice = #{orderPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderDate != null">
+        orderDate = #{orderDate,jdbcType=DATE},
+      </if>
+      <if test="orderText != null">
+        orderText = #{orderText,jdbcType=VARCHAR},
+      </if>
+      <if test="orderMan != null">
+        orderMan = #{orderMan,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPhone != null">
+        orderPhone = #{orderPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="orderSex != null">
+        orderSex = #{orderSex,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null">
+        payType = #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="orderMoney != null">
+        orderMoney = #{orderMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="orderWorker != null">
+        orderWorker = #{orderWorker,jdbcType=VARCHAR},
+      </if>
+      <if test="orderOrderWorker != null">
+        orderOrderWorker = #{orderOrderWorker,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCome != null">
+        orderCome = #{orderCome,jdbcType=VARCHAR},
+      </if>
+      <if test="orderRemake != null">
+        orderRemake = #{orderRemake,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where orderId = #{orderId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="getTodayOrder" resultType="com.chen.lifaapi.entity.Orders">
+    SELECT *
+    FROM orders
+    WHERE to_days(orderDate)=to_days(now())
+  </select>
+    <select id="numberOrder" resultType="java.lang.Integer" parameterType="int">
+      SELECT COUNT(*)
+      FROM orders
+      <if test="isToday == 1">
+        WHERE to_days(orderDate)=to_days(now())
+      </if>
+    </select>
+  <select id="moneyOrder" resultType="java.lang.Integer">
+    SELECT SUM(orderMoney)
+    FROM orders
+    <if test="isToday == 1">
+      WHERE to_days(orderDate)=to_days(now())
+    </if>
+  </select>
+    <select id="allOrders" resultType="com.chen.lifaapi.entity.Orders">
+      SELECT *
+      FROM orders
+    </select>
+    <select id="pageOrders" resultType="com.chen.lifaapi.entity.Orders">
+      SELECT *
+      FROM orders
+      LIMIT #{num},#{pagesize}
+    </select>
+</mapper>

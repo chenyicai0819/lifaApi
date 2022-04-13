@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.lifaapi.mapper.ViptypesMapper">
+    <delete id="delVipType">
+        DELETE FROM viptype
+        WHERE typeId=#{id}
+    </delete>
+
+    <select id="allViptype" resultType="com.chen.lifaapi.entity.Viptypes">
+    SELECT *
+    FROM viptypes
+  </select>
+    <select id="getDiscountById" resultType="com.chen.lifaapi.entity.Viptypes">
+        SELECT *
+        FROM viptypes
+        WHERE typeId=#{id}
+    </select>
+</mapper>

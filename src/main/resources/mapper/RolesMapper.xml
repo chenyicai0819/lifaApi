@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.lifaapi.mapper.RolesMapper">
+  <resultMap id="BaseResultMap" type="com.chen.lifaapi.entity.Roles">
+    <id column="rolesId" jdbcType="VARCHAR" property="rolesid" />
+    <result column="roleName" jdbcType="VARCHAR" property="rolename" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    rolesId, roleName
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from roles
+    where rolesId = #{rolesid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from roles
+    where rolesId = #{rolesid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="rolesId" keyProperty="rolesid" parameterType="com.chen.lifaapi.entity.Roles" useGeneratedKeys="true">
+    insert into roles (roleName)
+    values (#{rolename,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="rolesId" keyProperty="rolesid" parameterType="com.chen.lifaapi.entity.Roles" useGeneratedKeys="true">
+    insert into roles
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rolename != null">
+        roleName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rolename != null">
+        #{rolename,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chen.lifaapi.entity.Roles">
+    update roles
+    <set>
+      <if test="rolename != null">
+        roleName = #{rolename,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where rolesId = #{rolesid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chen.lifaapi.entity.Roles">
+    update roles
+    set roleName = #{rolename,jdbcType=VARCHAR}
+    where rolesId = #{rolesid,jdbcType=VARCHAR}
+  </update>
+</mapper>

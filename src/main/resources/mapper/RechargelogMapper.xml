@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.lifaapi.mapper.RechargelogMapper">
+  <resultMap id="BaseResultMap" type="com.chen.lifaapi.entity.Rechargelog">
+    <id column="rechId" jdbcType="INTEGER" property="rechid" />
+    <result column="orderId" jdbcType="VARCHAR" property="orderid" />
+    <result column="rechTime" jdbcType="DATE" property="rechtime" />
+    <result column="rechMoney" jdbcType="DECIMAL" property="rechmoney" />
+    <result column="payType" jdbcType="VARCHAR" property="paytype" />
+    <result column="rechWorker" jdbcType="VARCHAR" property="rechworker" />
+    <result column="isOpenCard" jdbcType="INTEGER" property="isopencard" />
+    <result column="cardId" jdbcType="VARCHAR" property="cardid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    rechId, orderId, rechTime, rechMoney, payType, rechWorker, isOpenCard, cardId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rechargelog
+    where rechId = #{rechid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from rechargelog
+    where rechId = #{rechid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="rechId" keyProperty="rechid" parameterType="com.chen.lifaapi.entity.Rechargelog" useGeneratedKeys="true">
+    insert into rechargelog (orderId, rechTime, rechMoney, 
+      payType, rechWorker, isOpenCard, 
+      cardId)
+    values (#{orderid,jdbcType=VARCHAR}, #{rechtime,jdbcType=DATE}, #{rechmoney,jdbcType=DECIMAL}, 
+      #{paytype,jdbcType=VARCHAR}, #{rechworker,jdbcType=VARCHAR}, #{isopencard,jdbcType=INTEGER}, 
+      #{cardid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="rechId" keyProperty="rechid" parameterType="com.chen.lifaapi.entity.Rechargelog" useGeneratedKeys="true">
+    insert into rechargelog
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderid != null">
+        orderId,
+      </if>
+      <if test="rechtime != null">
+        rechTime,
+      </if>
+      <if test="rechmoney != null">
+        rechMoney,
+      </if>
+      <if test="paytype != null">
+        payType,
+      </if>
+      <if test="rechworker != null">
+        rechWorker,
+      </if>
+      <if test="isopencard != null">
+        isOpenCard,
+      </if>
+      <if test="cardid != null">
+        cardId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderid != null">
+        #{orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="rechtime != null">
+        #{rechtime,jdbcType=DATE},
+      </if>
+      <if test="rechmoney != null">
+        #{rechmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="paytype != null">
+        #{paytype,jdbcType=VARCHAR},
+      </if>
+      <if test="rechworker != null">
+        #{rechworker,jdbcType=VARCHAR},
+      </if>
+      <if test="isopencard != null">
+        #{isopencard,jdbcType=INTEGER},
+      </if>
+      <if test="cardid != null">
+        #{cardid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chen.lifaapi.entity.Rechargelog">
+    update rechargelog
+    <set>
+      <if test="orderid != null">
+        orderId = #{orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="rechtime != null">
+        rechTime = #{rechtime,jdbcType=DATE},
+      </if>
+      <if test="rechmoney != null">
+        rechMoney = #{rechmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="paytype != null">
+        payType = #{paytype,jdbcType=VARCHAR},
+      </if>
+      <if test="rechworker != null">
+        rechWorker = #{rechworker,jdbcType=VARCHAR},
+      </if>
+      <if test="isopencard != null">
+        isOpenCard = #{isopencard,jdbcType=INTEGER},
+      </if>
+      <if test="cardid != null">
+        cardId = #{cardid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where rechId = #{rechid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chen.lifaapi.entity.Rechargelog">
+    update rechargelog
+    set orderId = #{orderid,jdbcType=VARCHAR},
+      rechTime = #{rechtime,jdbcType=DATE},
+      rechMoney = #{rechmoney,jdbcType=DECIMAL},
+      payType = #{paytype,jdbcType=VARCHAR},
+      rechWorker = #{rechworker,jdbcType=VARCHAR},
+      isOpenCard = #{isopencard,jdbcType=INTEGER},
+      cardId = #{cardid,jdbcType=VARCHAR}
+    where rechId = #{rechid,jdbcType=INTEGER}
+  </update>
+</mapper>
