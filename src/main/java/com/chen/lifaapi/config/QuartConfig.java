@@ -1,6 +1,7 @@
 package com.chen.lifaapi.config;
 
 import com.chen.lifaapi.utils.QuartUtils.PutChats;
+import com.chen.lifaapi.utils.QuartUtils.SalarySystem;
 import org.quartz.JobDetail;
 import org.quartz.Trigger;
 import org.springframework.context.annotation.Bean;
@@ -60,8 +61,8 @@ public class QuartConfig {
 //        trigger.setRepeatInterval(5000);
         //构建CronTrigger（触发器）实例,每天九点-十八点执行每隔20分钟执行一次
 //         .withSchedule(CronScheduleBuilder.cronSchedule("0 0/20 9-18 * * ?"))
-//         每天早上9：30执行
-        trigger.setCronExpression("0 30 9 * * ?");
+//         每天16：00执行
+        trigger.setCronExpression("0 00 16 * * ?");
         return trigger;
     }
 

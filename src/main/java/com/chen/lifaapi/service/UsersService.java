@@ -14,4 +14,5 @@ public interface UsersService {
     public Users login( String userid,String password );
     int getNum();
     public int logUp(String id,String username,String password);
+    Users getUsersById(String id);
 }

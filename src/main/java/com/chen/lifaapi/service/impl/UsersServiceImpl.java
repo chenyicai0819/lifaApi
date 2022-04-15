@@ -39,4 +39,9 @@ public class UsersServiceImpl implements UsersService {
     public int logUp(String id, String username, String password) {
         return usersMapper.logUp(id,username,password);
     }
+
+    @Override
+    public Users getUsersById(String id) {
+        return usersMapper.getUsersById(id);
+    }
 }

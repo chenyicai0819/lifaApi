@@ -78,6 +78,7 @@ public class OrderController {
                 System.out.println("会员卡抵扣");
                 // 如果余额充足，则自动扣除
                 vips.setVipsMoney(vips.getVipsMoney()-orderMoney);
+                vips.setVipsConsume(vips.getVipsConsume()+orderMoney);
                 // 更新会员信息
                 vipsService.updateVips(vips);
             }

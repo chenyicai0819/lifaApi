@@ -39,6 +39,12 @@ public class LoginController {
         return usersService.getUsers(username);
     }
 
+    @ApiOperation("根据id获取用户信息")
+    @PostMapping("/id")
+    public Users getUsersById(String id){
+        return usersService.getUsersById(id);
+    }
+
     @ApiOperation(value = "注册")
     @RequestMapping(value = "/logup", method = RequestMethod.POST)
     public String logUp(String username,String password){

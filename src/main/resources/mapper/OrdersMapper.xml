@@ -97,10 +97,13 @@
     <select id="allOrders" resultType="com.chen.lifaapi.entity.Orders">
       SELECT *
       FROM orders
+      Order by orderDate desc
     </select>
     <select id="pageOrders" resultType="com.chen.lifaapi.entity.Orders">
       SELECT *
       FROM orders
+      Order by orderDate desc
       LIMIT #{num},#{pagesize}
+
     </select>
 </mapper>

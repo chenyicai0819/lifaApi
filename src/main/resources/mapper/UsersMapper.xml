@@ -20,5 +20,10 @@
     SELECT COUNT(*)
     FROM users
   </select>
+  <select id="getUsersById" resultType="com.chen.lifaapi.entity.Users">
+    SELECT *
+    FROM users
+    WHERE userId=#{id}
+  </select>
 
 </mapper>

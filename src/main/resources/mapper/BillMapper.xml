@@ -31,11 +31,13 @@
     <select id="allBill" resultType="com.chen.lifaapi.entity.Bill">
       SELECT *
       FROM bill
+      ORDer by billTime desc
     </select>
     <select id="pageBills" resultType="com.chen.lifaapi.entity.Bill">
       SELECT *
       FROM bill
         WHERE billRemark="充值"
-      LIMIT #{num},#{pagesize}
+      ORDer by billTime desc
+        LIMIT #{num},#{pagesize}
     </select>
 </mapper>
