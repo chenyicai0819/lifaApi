@@ -56,8 +56,8 @@ public class VipBatchServiceImpl implements VipBatchService {
                     vips.setVipPassword(getValues(row.getCell(3)));
                     vips.setVipPhone(getValues(row.getCell(4)));
                     vips.setVipSex(getValues(row.getCell(5)));
-                    vips.setVipBirthday(Timestamp.valueOf(getValues(row.getCell(6))+" 16:00:00"));
-                    vips.setVipOpencard(Timestamp.valueOf(getValues(row.getCell(7))+" 16:00:00"));
+                    vips.setVipBirthday(Timestamp.valueOf(getValues(row.getCell(6))+" 24:00:00"));
+                    vips.setVipOpencard(Timestamp.valueOf(getValues(row.getCell(7))+" 24:00:00"));
                     vips.setVipsMoney(Long.valueOf(getValues(row.getCell(8))));
                     vips.setVipsConsume(0L);
                     vips.setVipsBonus(0L);
