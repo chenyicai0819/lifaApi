@@ -38,7 +38,54 @@
       #{vipOpencard,jdbcType=TIMESTAMP}, #{vipsMoney,jdbcType=DECIMAL}, #{vipsConsume,jdbcType=DECIMAL},
       #{vipsBonus,jdbcType=DECIMAL}, #{vipsLast,jdbcType=TIMESTAMP})
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.chen.lifaapi.entity.Vips">
+    <insert id="insertVipBatch">
+      insert into vips (vipId,typeId, vipName, vipPassWord,
+                        vipPhone, vipSex, vipBirthday,
+                        vipOpenCard, vipsMoney, vipsConsume,
+                        vipsBonus, vipsLast)
+      values
+      <foreach collection="vipDataList" item="vipData" separator=",">
+      <trim prefix=" (" suffix=")" suffixOverrides="," >
+        <if test="vipData.vipId != null">
+          #{vipData.vipId,jdbcType=VARCHAR},
+        </if>
+        <if test="vipData.typeId != null">
+          #{vipData.typeId,jdbcType=INTEGER},
+        </if>
+        <if test="vipData.vipName != null">
+          #{vipData.vipName,jdbcType=VARCHAR},
+        </if>
+        <if test="vipData.vipPassword != null">
+          #{vipData.vipPassword,jdbcType=VARCHAR},
+        </if>
+        <if test="vipData.vipPhone != null">
+          #{vipData.vipPhone,jdbcType=VARCHAR},
+        </if>
+        <if test="vipData.vipSex != null">
+          #{vipData.vipSex,jdbcType=VARCHAR},
+        </if>
+        <if test="vipData.vipBirthday != null">
+          #{vipData.vipBirthday,jdbcType=TIMESTAMP},
+        </if>
+        <if test="vipData.vipOpencard != null">
+            #{vipData.vipOpencard,jdbcType=TIMESTAMP},
+        </if>
+        <if test="vipData.vipsMoney != null">
+          #{vipData.vipsMoney,jdbcType=DECIMAL},
+        </if>
+        <if test="vipData.vipsConsume != null">
+          #{vipData.vipsConsume,jdbcType=DECIMAL},
+        </if>
+        <if test="vipData.vipsBonus != null">
+          #{vipData.vipsBonus,jdbcType=DECIMAL},
+        </if>
+        <if test="vipData.vipsLast != null">
+          #{vipData.vipsLast,jdbcType=TIMESTAMP},
+        </if>
+      </trim>
+      </foreach>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.chen.lifaapi.entity.Vips">
     update vips
     <set>
       <if test="typeId != null">

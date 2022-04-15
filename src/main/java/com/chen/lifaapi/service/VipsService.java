@@ -2,6 +2,7 @@ package com.chen.lifaapi.service;
 
 import com.chen.lifaapi.entity.Vips;
 
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -23,4 +24,5 @@ public interface VipsService {
     int getNowMoney(String id);
     List<Vips> getVipsByEvery(Vips vips);
     public Vips getOneVipForId(String id);
+    int insertVipBatch(List<Vips> vipDataList);
 }

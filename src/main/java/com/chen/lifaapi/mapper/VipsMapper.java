@@ -18,5 +18,5 @@ public interface VipsMapper {
     int getNowMoney(String id);
     List<Vips> getVipsByEvery(Vips vips);
     Vips getOneVipForId(String id);
-
+    int insertVipBatch(List<Vips> vipDataList);
 }
