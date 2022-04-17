@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -54,6 +56,8 @@ public class OrderController {
                         String payType,Long orderMoney,String orderWorker,
                         String orderOrderWorker,String orderCome,String orderRemake,
                         double bonus1,double bonus2){
+        Date date=new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Orders orders=new Orders();
         orders.setOrderId(orderId);
         orders.setOrderPrice(orderPrice);
@@ -79,6 +83,7 @@ public class OrderController {
                 // 如果余额充足，则自动扣除
                 vips.setVipsMoney(vips.getVipsMoney()-orderMoney);
                 vips.setVipsConsume(vips.getVipsConsume()+orderMoney);
+                vips.setVipsLast(Timestamp.valueOf(dateFormat.format(date)));
                 // 更新会员信息
                 vipsService.updateVips(vips);
             }
@@ -122,6 +127,13 @@ public class OrderController {
         int num=(now-1)*pagesize; //分页开始的位置
         // now 为当前页数，pagesize 为每页个数
         return orderService.pageOrders(num,pagesize);
+    }
+
+    @ApiOperation(value = "获取员工一段时间里的工作记录")
+    @GetMapping("/day")
+    public List<Orders> getDayWorkersOrder(String start,String end,String name){
+
+        return orderService.getDayWorkersOrder(start,end,name);
     }
 
 

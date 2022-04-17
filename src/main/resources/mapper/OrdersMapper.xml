@@ -106,4 +106,10 @@
       LIMIT #{num},#{pagesize}
 
     </select>
+    <select id="getDayWorkersOrder" resultType="com.chen.lifaapi.entity.Orders">
+      SELECT orderDate ,sum(orderMoney) orderMoney
+      FROM orders
+      WHERE (orderWorker=#{name} OR orderOrderWorker=#{name}) AND orderDate between #{start} AND #{end}
+      GROUP BY orderDate
+    </select>
 </mapper>

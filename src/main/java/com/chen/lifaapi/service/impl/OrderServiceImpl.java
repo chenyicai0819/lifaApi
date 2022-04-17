@@ -85,4 +85,9 @@ public class OrderServiceImpl implements OrderService {
     public List<Orders> pageOrders(int num, int pagesize) {
         return ordersMapper.pageOrders(num,pagesize);
     }
+
+    @Override
+    public List<Orders> getDayWorkersOrder(String start, String end, String name) {
+        return ordersMapper.getDayWorkersOrder(start,end,name);
+    }
 }

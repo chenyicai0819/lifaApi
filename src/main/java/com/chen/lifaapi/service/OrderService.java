@@ -22,4 +22,5 @@ public interface OrderService {
     int moneyOrder(int isToday);
     List<Orders> allOrders();
     List<Orders> pageOrders(int num, int pagesize);
+    List<Orders> getDayWorkersOrder(String start,String end,String name);
 }

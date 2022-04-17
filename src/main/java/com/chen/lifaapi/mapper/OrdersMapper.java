@@ -15,4 +15,5 @@ public interface OrdersMapper {
     int numberOrder(int isToday);
     int moneyOrder(int isToday);
     List<Orders> pageOrders(int num, int pagesize);
+    List<Orders> getDayWorkersOrder(String start,String end,String name);
 }
