@@ -135,6 +135,11 @@ public class OrderController {
 
         return orderService.getDayWorkersOrder(start,end,name);
     }
+    @ApiOperation(value = "获取每个项目在一段时间里的销售记录")
+    @GetMapping("/dayforname")
+    public List<Orders> getDayOrdersForName(String start,String end,String name){
+        return orderService.getDayOrdersForName(start, end, name);
+    }
 
 
 

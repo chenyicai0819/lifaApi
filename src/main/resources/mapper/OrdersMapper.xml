@@ -112,4 +112,10 @@
       WHERE (orderWorker=#{name} OR orderOrderWorker=#{name}) AND orderDate between #{start} AND #{end}
       GROUP BY orderDate
     </select>
+    <select id="getDayOrdersForName" resultType="com.chen.lifaapi.entity.Orders">
+      SELECT orderDate ,COUNT(*) orderMoney
+      FROM orders
+      WHERE orderText=#{name} AND orderDate between #{start} AND #{end}
+      GROUP BY orderDate
+    </select>
 </mapper>
