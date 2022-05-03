@@ -86,6 +86,8 @@ public class OrderController {
                 vips.setVipsLast(Timestamp.valueOf(dateFormat.format(date)));
                 // 更新会员信息
                 vipsService.updateVips(vips);
+                //更新会员信息之后发送通知信息
+
             }
         }
         return orderService.addOrder(orders,bonus1,bonus2);
@@ -141,6 +143,11 @@ public class OrderController {
         return orderService.getDayOrdersForName(start, end, name);
     }
 
+    @ApiOperation(value = "获取每个商品在一段时间里的销售记录")
+    @GetMapping("/dayforcomm")
+    public List<Orders> getDayOrderForComm(String start,String end,String name){
+        return orderService.getDayOrderForComm(start, end, name);
+    }
 
 
     @ApiOperation(value = "导出营业记录")

@@ -20,5 +20,9 @@ public class Systemlog implements Serializable {
 
     private String systemuser;
 
+    private String systemurl;
+
+    private String systemmethod;
+
     private static final long serialVersionUID = 1L;
 }

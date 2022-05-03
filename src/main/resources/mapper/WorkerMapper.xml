@@ -85,5 +85,10 @@
         FROM worker
         WHERE workId=#{id}
     </select>
+    <select id="getInWorker" resultType="com.chen.lifaapi.entity.Worker">
+        SELECT *
+        FROM worker
+        WHERE workState=1
+    </select>
 
 </mapper>

@@ -48,6 +48,12 @@ public class WorkerController {
         return workerService.getAllWorker();
     }
 
+    @GetMapping("/in")
+    @ApiOperation(value = "获取在职员工")
+    public List<Worker> getInWorker(){
+        return workerService.getInWorker();
+    }
+
     @GetMapping("/get")
     @ApiOperation(value = "根据条件获取员工信息")
     public List<Worker> getWorker(String state,String level){

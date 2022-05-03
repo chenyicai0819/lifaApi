@@ -25,4 +25,5 @@ public class CommTypeServiceImpl implements CommTypeService {
     public List<Commoditytype> getAllType() {
         return ctm.getAllType();
     }
+
 }

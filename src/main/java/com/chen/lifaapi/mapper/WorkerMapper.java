@@ -18,4 +18,5 @@ public interface WorkerMapper {
     List<Worker> getWorker(Map<String,Object> map);
     int updateWorker(Worker worker);
     Worker getOneForId(String id);
+    List<Worker> getInWorker();
 }

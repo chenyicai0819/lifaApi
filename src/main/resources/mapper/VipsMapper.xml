@@ -14,10 +14,11 @@
     <result column="vipsConsume" jdbcType="DECIMAL" property="vipsConsume" />
     <result column="vipsBonus" jdbcType="DECIMAL" property="vipsBonus" />
     <result column="vipsLast" jdbcType="TIMESTAMP" property="vipsLast" />
+    <result column="openid" jdbcType="VARCHAR" property="openid" />
   </resultMap>
   <sql id="Base_Column_List">
     vipId, typeId, vipName, vipPassWord, vipPhone, vipSex, vipBirthday, vipOpenCard, 
-    vipsMoney, vipsConsume, vipsBonus, vipsLast
+    vipsMoney, vipsConsume, vipsBonus, vipsLast, openid
   </sql>
     <select id="getVipList" resultType="com.chen.lifaapi.entity.Vips">
       select
@@ -32,17 +33,17 @@
     insert into vips (vipId,typeId, vipName, vipPassWord,
       vipPhone, vipSex, vipBirthday, 
       vipOpenCard, vipsMoney, vipsConsume, 
-      vipsBonus, vipsLast)
+      vipsBonus, vipsLast,openid)
     values (#{vipId,jdbcType=VARCHAR},#{typeId,jdbcType=INTEGER}, #{vipName,jdbcType=VARCHAR}, #{vipPassword,jdbcType=VARCHAR},
       #{vipPhone,jdbcType=VARCHAR}, #{vipSex,jdbcType=VARCHAR}, #{vipBirthday,jdbcType=TIMESTAMP},
       #{vipOpencard,jdbcType=TIMESTAMP}, #{vipsMoney,jdbcType=DECIMAL}, #{vipsConsume,jdbcType=DECIMAL},
-      #{vipsBonus,jdbcType=DECIMAL}, #{vipsLast,jdbcType=TIMESTAMP})
+      #{vipsBonus,jdbcType=DECIMAL}, #{vipsLast,jdbcType=TIMESTAMP}, #{openid,jdbcType=VARCHAR})
   </insert>
     <insert id="insertVipBatch">
       insert into vips (vipId,typeId, vipName, vipPassWord,
                         vipPhone, vipSex, vipBirthday,
                         vipOpenCard, vipsMoney, vipsConsume,
-                        vipsBonus, vipsLast)
+                        vipsBonus, vipsLast,openid)
       values
       <foreach collection="vipDataList" item="vipData" separator=",">
       <trim prefix=" (" suffix=")" suffixOverrides="," >
@@ -82,6 +83,9 @@
         <if test="vipData.vipsLast != null">
           #{vipData.vipsLast,jdbcType=TIMESTAMP},
         </if>
+        <if test="vipData.openid != null">
+          #{vipData.openid,jdbcType=VARCHAR},
+        </if>
       </trim>
       </foreach>
     </insert>
@@ -120,6 +124,9 @@
       </if>
       <if test="vipsLast != null">
         vipsLast = #{vipsLast,jdbcType=TIMESTAMP},
+      </if>
+      <if test="openid != null">
+        openid = #{openid,jdbcType=TIMESTAMP},
       </if>
     </set>
     where vipId = #{vipId,jdbcType=VARCHAR}
@@ -180,6 +187,9 @@
         </if>
         <if test="vipsLast != null">
           AND vipsLast = #{vipsLast,jdbcType=TIMESTAMP}
+        </if>
+        <if test="openid != null">
+          AND openid = #{openid,jdbcType=TIMESTAMP}
         </if>
       </where>
     </select>

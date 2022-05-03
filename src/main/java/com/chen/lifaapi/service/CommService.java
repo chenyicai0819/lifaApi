@@ -19,4 +19,5 @@ public interface CommService {
     int addComm(Commodity commodity);
     int upComm(Commodity commodity);
     int delComm(int id);
+    List<Commodity> getSomeComm(String type);
 }

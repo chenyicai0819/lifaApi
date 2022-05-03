@@ -26,4 +26,5 @@ public interface WorkerService {
     int updateWorker(Worker worker);
     List<Map<String,String>> getAllMoney();
     Worker getOneForId(String id);
+    List<Worker> getInWorker();
 }

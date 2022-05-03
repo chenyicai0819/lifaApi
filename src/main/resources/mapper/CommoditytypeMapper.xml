@@ -6,4 +6,5 @@
     SELECT *
     FROM commoditytype
   </select>
+
 </mapper>

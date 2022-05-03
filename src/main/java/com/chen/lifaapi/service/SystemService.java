@@ -12,4 +12,5 @@ import com.chen.lifaapi.entity.Systems;
 public interface SystemService {
     int upSystem(Systems systems);
     Systems getSystem(String name);
+
 }

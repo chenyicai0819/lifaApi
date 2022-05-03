@@ -118,4 +118,10 @@
       WHERE orderText=#{name} AND orderDate between #{start} AND #{end}
       GROUP BY orderDate
     </select>
+    <select id="getDayOrderForComm" resultType="com.chen.lifaapi.entity.Orders">
+      SELECT orderDate ,COUNT(*) orderMoney
+      FROM orders
+      WHERE orderText LIKE concat('%',#{name},'%') AND orderDate between #{start} AND #{end}
+      GROUP BY orderDate
+    </select>
 </mapper>

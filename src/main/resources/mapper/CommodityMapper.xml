@@ -56,4 +56,11 @@
     SELECT SUM(commPrice*commNum) allPrice
       FROM commodity
   </select>
+    <select id="getSomeComm" resultType="com.chen.lifaapi.entity.Commodity">
+      SELECT *
+      FROM commodity
+      <if test="type!=0">
+        WHERE commTyId=#{type}
+      </if>
+    </select>
 </mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.lifaapi.mapper.LogMapper">
+
+    <insert id="addSystemLog">
+        INSERT INTO systemlog(systemText,SystemTime,systemIp,systemUser,systemURL,systemMethod)
+        VALUES (#{systemtext,jdbcType=VARCHAR},#{systemtime,jdbcType=TIMESTAMP},
+                #{systemip,jdbcType=VARCHAR},#{systemuser,jdbcType=VARCHAR},
+                #{systemurl,jdbcType=VARCHAR},#{systemmethod,jdbcType=VARCHAR})
+    </insert>
+    <select id="getSystem" resultType="com.chen.lifaapi.entity.Systemlog">
+        SELECT * FROM systemlog
+    </select>
+    <select id="getLastLogin" resultType="com.chen.lifaapi.entity.Systemlog">
+        SELECT *
+        FROM systemlog
+        WHERE systemMethod="com.chen.lifaapi.controller.LoginController.getUsersById"
+        order by systemTime
+        desc limit 1
+    </select>
+</mapper>

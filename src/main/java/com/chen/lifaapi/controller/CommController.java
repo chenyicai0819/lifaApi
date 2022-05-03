@@ -65,4 +65,10 @@ public class CommController {
     public int delComm(int id){
         return commService.delComm(id);
     }
+
+    @ApiOperation(value = "根据类型获取商品")
+    @GetMapping("/type")
+    public List<Commodity> getSomeComm(String type){
+        return commService.getSomeComm(type);
+    }
 }

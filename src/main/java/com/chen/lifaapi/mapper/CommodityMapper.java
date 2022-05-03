@@ -14,4 +14,5 @@ public interface CommodityMapper {
     int priceComm();
     int upComm(Commodity commodity);
     int delComm(int id);
+    List<Commodity> getSomeComm(String type);
 }

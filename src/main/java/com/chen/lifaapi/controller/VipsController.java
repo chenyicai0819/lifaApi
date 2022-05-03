@@ -3,6 +3,7 @@ package com.chen.lifaapi.controller;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
+import com.chen.lifaapi.aop.Log;
 import com.chen.lifaapi.entity.Vips;
 import com.chen.lifaapi.service.VipsService;
 import com.chen.lifaapi.utils.DownloadFile;
@@ -36,6 +37,7 @@ public class VipsController {
     private VipsService vipsService;
     @Autowired
     private StringToUtf8 stu;
+
 
     @ApiOperation(value = "获取所有Vip信息")
     @GetMapping("/get")

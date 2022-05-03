@@ -77,4 +77,9 @@ public class WorkerServiceImpl implements WorkerService {
     public Worker getOneForId(String id) {
         return workerMapper.getOneForId(id);
     }
+
+    @Override
+    public List<Worker> getInWorker() {
+        return workerMapper.getInWorker();
+    }
 }

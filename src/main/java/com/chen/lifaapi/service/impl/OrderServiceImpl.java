@@ -95,4 +95,9 @@ public class OrderServiceImpl implements OrderService {
     public List<Orders> getDayOrdersForName(String start, String end, String name) {
         return ordersMapper.getDayOrdersForName(start,end,name);
     }
+
+    @Override
+    public List<Orders> getDayOrderForComm(String start, String end, String name) {
+        return ordersMapper.getDayOrderForComm(start, end, name);
+    }
 }

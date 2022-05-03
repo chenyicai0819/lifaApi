@@ -35,5 +35,7 @@ public class Vips implements Serializable {
 
     private Timestamp vipsLast;
 
+    private String openid;
+
     private static final long serialVersionUID = 1L;
 }

@@ -48,6 +48,11 @@ public class CommServiceImpl implements CommService {
     }
 
     @Override
+    public List<Commodity> getSomeComm(String type) {
+        return cm.getSomeComm(type);
+    }
+
+    @Override
     public List<Commodity> getAllComm() {
         return cm.getAllComm();
     }
