@@ -44,6 +44,12 @@ public class LoginController {
         return 0;
     }
 
+    @ApiOperation(value = "登出")
+    @PostMapping( "/logout")
+    public void logOut(String id) {
+        addLog(id,"com.chen.lifaapi.controller.LoginController.logout","登出");
+    }
+
     @ApiOperation("获取用户信息")
     @GetMapping("/get/users")
     public Users getUsers(String username){
@@ -53,7 +59,7 @@ public class LoginController {
     @ApiOperation("根据id获取用户信息")
     @PostMapping("/id")
     public Users getUsersById(String id){
-        addLog(id,"com.chen.lifaapi.controller.LoginController.getUsersById");
+        addLog(id,"com.chen.lifaapi.controller.LoginController.getUsersById","登录");
         return usersService.getUsersById(id);
     }
 
@@ -72,7 +78,7 @@ public class LoginController {
     /**
      * 在此处添加登录登出的日志
      */
-    private void addLog(String id,String path){
+    private void addLog(String id,String path,String msg){
 
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();//这个RequestContextHolder是Springmvc提供来获得请求的东西
         HttpServletRequest request = ((ServletRequestAttributes)requestAttributes).getRequest();
@@ -85,8 +91,8 @@ public class LoginController {
         systemlog.setSystemip(request.getRemoteAddr());
         systemlog.setSystemurl(request.getRequestURL().toString());
         systemlog.setSystemmethod(path);
-        systemlog.setSystemuser("登录");
-        systemlog.setSystemtext(id);
+        systemlog.setSystemuser(id);
+        systemlog.setSystemtext(msg);
 
         ls.addSystemLog(systemlog);
     }

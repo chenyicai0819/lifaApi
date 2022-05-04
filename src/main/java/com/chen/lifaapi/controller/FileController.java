@@ -1,5 +1,6 @@
 package com.chen.lifaapi.controller;
 
+import com.chen.lifaapi.aop.Log;
 import com.chen.lifaapi.core.ResponseData;
 import com.chen.lifaapi.entity.Vips;
 import com.chen.lifaapi.service.VipBatchService;
@@ -39,6 +40,7 @@ public class FileController {
 
     @ApiOperation(value = "下载批量导入会员的模板")
     @RequestMapping("/downloadTemplate")
+    @Log(value = "下载批量导入会员的模板")
     public String downloadHcTemplate(HttpServletResponse response) {
         String fileName = "vipAddTemplate.xlsx";     // 默认下载的文件名，根据业务需要替换成要下载的文件名
         InputStream fileInputStream = this.getClass().getResourceAsStream("/static/vipAddTemplate.xlsx");
@@ -51,6 +53,7 @@ public class FileController {
     }
 
     @ApiOperation(value = "批量导入会员")
+    @Log(value = "批量导入会员")
     @RequestMapping(value = "/insertVipBatch", method = RequestMethod.POST)
     public ResponseData insertHcBatch(@RequestParam(value = "vipFile", required = false) MultipartFile vipFile) {
         // 获得文件名

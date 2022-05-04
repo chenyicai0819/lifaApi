@@ -3,6 +3,7 @@ package com.chen.lifaapi.controller;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
+import com.chen.lifaapi.aop.Log;
 import com.chen.lifaapi.entity.Orders;
 import com.chen.lifaapi.entity.Vips;
 import com.chen.lifaapi.service.OrderService;
@@ -51,6 +52,7 @@ public class OrderController {
 
     @ApiOperation(value = "添加订单记录")
     @PostMapping("/add")
+    @Log(value = "添加订单记录")
     public int addOrder(String orderId,Long orderPrice, String orderText,
                         String orderMan,String orderPhone, String orderSex,
                         String payType,Long orderMoney,String orderWorker,
@@ -102,6 +104,7 @@ public class OrderController {
 
     @ApiOperation(value = "更新订单信息")
     @PostMapping("/update")
+    @Log(value = "更新订单信息")
     public int upOrders(Orders orders){
         return orderService.upOrder(orders);
     }
@@ -151,6 +154,7 @@ public class OrderController {
 
 
     @ApiOperation(value = "导出营业记录")
+    @Log(value = "导出营业记录")
     @GetMapping("/out")
     public void outAllOrders(HttpServletResponse response){
         List<Orders> orders=orderService.allOrders();

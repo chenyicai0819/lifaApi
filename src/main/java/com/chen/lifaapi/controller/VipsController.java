@@ -55,6 +55,7 @@ public class VipsController {
 
     @ApiOperation(value = "添加Vips客户")
     @PostMapping("/add")
+    @Log(value = "添加Vips客户")
     public int addVips(Vips vips){
         vips.setVipOpencard(new Timestamp(System.currentTimeMillis()));
         vips.setVipsLast(new Timestamp(System.currentTimeMillis()));
@@ -63,6 +64,7 @@ public class VipsController {
 
     @ApiOperation(value = "修改会员信息")
     @PostMapping("/up")
+    @Log(value = "修改会员信息")
     public int updateVips(Vips vips){
         return vipsService.updateVips(vips);
     }
@@ -76,6 +78,7 @@ public class VipsController {
 
     @ApiOperation(value = "导出所有会员（excel）")
     @GetMapping("/out")
+    @Log(value = "导出所有会员")
     public void outAllVips(HttpServletResponse response){
         List<Vips> vips=vipsService.getVipList();
 

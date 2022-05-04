@@ -1,5 +1,6 @@
 package com.chen.lifaapi.controller;
 
+import com.chen.lifaapi.aop.Log;
 import com.chen.lifaapi.entity.Systemlog;
 import com.chen.lifaapi.entity.Systems;
 import com.chen.lifaapi.service.LogService;
@@ -32,6 +33,7 @@ public class SystemController {
 
     @PostMapping("/up")
     @ApiOperation(value = "修改设置")
+    @Log(value = "修改设置")
     public int upSystem(Systems systems){
         return systemService.upSystem(systems);
     }

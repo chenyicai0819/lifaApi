@@ -3,6 +3,7 @@ package com.chen.lifaapi.controller;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
+import com.chen.lifaapi.aop.Log;
 import com.chen.lifaapi.entity.Salarylog;
 import com.chen.lifaapi.entity.Worker;
 import com.chen.lifaapi.service.WorkerLevelService;
@@ -66,6 +67,7 @@ public class WorkerController {
 
     @PostMapping("/add")
     @ApiOperation(value = "添加新员工")
+    @Log(value = "添加新员工")
     public int addWorker(Worker worker){
         String level=worker.getLevelId();
         worker.setBaseSalary(wls.getLevelForID(level).getLevelCommission());
@@ -79,6 +81,7 @@ public class WorkerController {
     }
 
     @PostMapping("/pay")
+    @Log(value = "发放员工工资")
     @ApiOperation(value = "发放员工工资")
     public int payRoll(Salarylog salarylog){
         salarylog.setSaDate(new Date());
@@ -86,19 +89,22 @@ public class WorkerController {
     }
 
     @PostMapping("/bonus")
-    @ApiOperation(value = "更新员工信息")
+    @Log(value = "更新员工提成信息")
+    @ApiOperation(value = "更新员工提成信息")
     public int upBounsWorker(Worker worker){
         return workerService.addBonus(worker.getWorkId(),worker.getBonus());
     }
 
     @PostMapping("/up")
     @ApiOperation(value = "更新员工信息")
+    @Log(value = "更新员工信息")
     public int updateWorker(Worker worker){
         return workerService.updateWorker(worker);
     }
 
     @GetMapping("/outmoneytable")
     @ApiOperation(value = "导出工资表")
+    @Log(value = "导出工资表")
     public void outMoneyTable(HttpServletResponse response){
         List<Map<String,String>> salarylogs=workerService.getAllMoney();
 

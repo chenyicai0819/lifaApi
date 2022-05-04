@@ -1,5 +1,6 @@
 package com.chen.lifaapi.controller;
 
+import com.chen.lifaapi.aop.Log;
 import com.chen.lifaapi.entity.Commodity;
 import com.chen.lifaapi.service.CommService;
 import io.swagger.annotations.Api;
@@ -50,18 +51,21 @@ public class CommController {
 
     @ApiOperation(value = "添加商品")
     @PostMapping("/add")
+    @Log(value = "添加商品")
     public int addComm(Commodity commodity){
         return commService.addComm(commodity);
     }
 
     @ApiOperation(value = "修改商品")
     @PostMapping("/up")
+    @Log(value = "修改商品信息")
     public int upComm(Commodity commodity){
         return commService.upComm(commodity);
     }
 
     @ApiOperation(value = "删除商品")
     @PostMapping("/del")
+    @Log(value = "删除商品")
     public int delComm(int id){
         return commService.delComm(id);
     }

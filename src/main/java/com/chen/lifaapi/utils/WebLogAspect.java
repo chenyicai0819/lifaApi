@@ -84,7 +84,7 @@ public class WebLogAspect {
         String methods=joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName();
         systemlog.setSystemmethod(methods);
         if (!"com.chen.lifaapi.controller.LoginController.getUsersById".equals(methods)){
-            String user=ls.getLastLogin().getSystemtext();
+            String user=ls.getLastLogin().getSystemuser();
             systemlog.setSystemuser(user);
             systemlog.setSystemtext(text);
         }else {

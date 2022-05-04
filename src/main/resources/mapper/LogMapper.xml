@@ -9,7 +9,7 @@
                 #{systemurl,jdbcType=VARCHAR},#{systemmethod,jdbcType=VARCHAR})
     </insert>
     <select id="getSystem" resultType="com.chen.lifaapi.entity.Systemlog">
-        SELECT * FROM systemlog
+        SELECT * FROM systemlog ORDER BY systemtime desc
     </select>
     <select id="getLastLogin" resultType="com.chen.lifaapi.entity.Systemlog">
         SELECT *

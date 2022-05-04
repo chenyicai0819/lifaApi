@@ -1,5 +1,6 @@
 package com.chen.lifaapi.controller;
 
+import com.chen.lifaapi.aop.Log;
 import com.chen.lifaapi.entity.Service;
 import com.chen.lifaapi.service.ServiceService;
 import io.swagger.annotations.Api;
@@ -42,12 +43,14 @@ public class ServiceController {
     }
     @PostMapping("/page")
     @ApiOperation(value = "删除服务项目")
+    @Log(value = "删除服务项目")
     public int delService(int id){
         return serviceService.delService(id);
     }
 
     @PostMapping("/add")
-    @ApiOperation(value = "添加新的服务项目")
+    @Log(value = "添加订单记录")
+    @ApiOperation(value = "删除服务项目")
     public int addService(String name,String price){
         return serviceService.addService(name,price);
     }

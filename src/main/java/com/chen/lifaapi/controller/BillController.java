@@ -1,5 +1,6 @@
 package com.chen.lifaapi.controller;
 
+import com.chen.lifaapi.aop.Log;
 import com.chen.lifaapi.entity.Bill;
 import com.chen.lifaapi.service.BillService;
 import io.swagger.annotations.Api;
@@ -29,6 +30,7 @@ public class BillController {
     private BillService billService;
 
     @PostMapping("/add" )
+    @Log(value = "添加账单")
     @ApiOperation(value = "添加新账单")
     public void addBill(String billNo,Integer billType,Long billMoney,
                         String billText,String billWorker,String billOrderWorkers,

@@ -1,5 +1,6 @@
 package com.chen.lifaapi.controller;
 
+import com.chen.lifaapi.aop.Log;
 import com.chen.lifaapi.entity.Viptypes;
 import com.chen.lifaapi.service.ViptypeService;
 import io.swagger.annotations.Api;
@@ -34,6 +35,7 @@ public class VipTypeController {
 
     @ApiOperation(value = "删除会员类型")
     @PostMapping("/del")
+    @Log(value = "删除会员类型")
     public int delVipType(int id){
         return vs.delVipType(id);
     }
